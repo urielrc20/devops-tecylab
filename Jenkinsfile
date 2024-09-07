@@ -1,9 +1,25 @@
 pipeline {
   agent any
+  environment {
+    SONARQUBE_SERVER = 'SonarCLoud'
+    SONAR_TOKEN = credentials('SonarCLoud')
+  }
   stages {
     stage('Build'){
       steps {
-        echo 'BUilding'
+        script {
+          sh './gradlew sonarqube'
+        }
+        
+      }
+    }
+    stage ('Quality Gate'){
+      steps {
+        script {
+          timeout(time: 1, unit: 'HOURS') {
+            waitForQualityGate()
+          }
+        }
       }
     }
   }

@@ -1,8 +1,8 @@
 pipeline {
   agent any
   environment {
-    SONARQUBE_SERVER = 'SonarCLoud'
-    SONAR_TOKEN = credentials('SonarCLoud')
+    SONARQUBE_SERVER = 'SonarCloud'
+    SONAR_TOKEN = credentials('SonarCloud')
   }
   stages {
     stage('Build'){
